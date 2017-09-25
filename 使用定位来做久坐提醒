@@ -1,0 +1,334 @@
+package com.example.root.sportshelper.service;
+
+import android.app.Service;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Handler;
+import android.os.IBinder;
+import android.os.Message;
+import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
+
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
+import com.amap.api.maps2d.LocationSource;
+import com.example.root.sportshelper.R;
+import com.example.root.sportshelper.ShowCountDown;
+import com.example.root.sportshelper.ShowRemind;
+import com.example.root.sportshelper.database.GpsRecord;
+import com.example.root.sportshelper.utils.AudioUtils;
+import com.example.root.sportshelper.utils.Constant;
+import com.example.root.sportshelper.utils.DbHelper;
+import com.example.root.sportshelper.utils.MiscUtil;
+import com.example.root.sportshelper.utils.MyTime;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
+
+//久坐提醒服务,
+public class SedentaryReminderService extends Service implements AMapLocationListener ,LocationSource{
+    private String TAG="SedentaryReminderService";
+    private Boolean SedentaryReminder;      //就坐提醒是否打开
+    private String startTime;               //起始时间
+    private String endTime;                   //结束时间
+    private Boolean unDisturb;              //午休免打扰是否打开
+    private BroadcastReceiver openSedentaryReminder;
+    private Timer timer;
+    private TimerTask task;
+
+    //根据定位来判断是否久坐
+    private float curr_distance = 0;
+    private float lastDistance=curr_distance;
+    //定位需要的声明
+    private AMapLocationClient mLocationClient = null;//定位发起端
+    private AMapLocationClientOption mLocationOption = null;//定位参数
+    private LocationSource.OnLocationChangedListener mListener = null;//定位监听器
+    private AMapLocation lastAMapLocation=null;                          //上一个位置
+    private int flag;                                                   //表示第几次调用计时器
+
+    ArrayList<GpsRecord> locations = new ArrayList<>();
+
+    private Handler mHandler = new Handler(){
+        public void handleMessage(Message message){
+            switch (message.what){
+
+            }
+        }
+    };
+
+    @Override
+    public void onCreate() {                //服务创建时调用
+        super.onCreate();
+        Log.i(TAG, "久坐提醒服务打开");
+        //初始化广播
+        initBroadcastReceiver();
+        initInfo();
+        initLoc();
+        if(SedentaryReminder){
+            checkSedentary();
+        }
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {      //每次服务启动时调用
+
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        // TODO: Return the communication channel to the service.
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    private void initBroadcastReceiver(){
+        //定义意图过滤器
+        final IntentFilter filter=new IntentFilter();
+        filter.addAction(Constant.SEDENTARYREMINDER);
+        openSedentaryReminder=new BroadcastReceiver() {
+            @Override
+            public void onReceive(Context context, Intent intent) {
+                String action =intent.getAction();
+                if(action.equals(Constant.SEDENTARYREMINDER)){
+                    Log.i(TAG, "onReceive: 接收到久坐提醒变化广播");
+                    initInfo();
+                    if(SedentaryReminder){
+                        Log.i(TAG, "onReceive: 开启久坐提醒");
+                        checkSedentary();
+                    }else {
+                        if(timer!=null){
+                            Log.i(TAG, "onReceive: 取消久坐提醒");
+                            timer.cancel();
+                        }
+                    }
+                }
+                abortBroadcast();           //截断广播
+            }
+        };
+        registerReceiver(openSedentaryReminder,filter);
+    }
+
+    private void initInfo(){
+        curr_distance=0;
+        flag=1;
+        lastDistance=curr_distance;
+        SedentaryReminder= DbHelper.getOpenSedentaryReminder();
+        startTime=DbHelper.getStartTime();
+        endTime=DbHelper.getEndTime();
+        unDisturb=DbHelper.getOpenUnDisturb();
+    }
+
+    //检查是否久坐
+    private void checkSedentary(){
+        timer=new Timer(true);
+        task=new TimerTask() {
+            @Override
+            public void run() {
+                try {
+                    if(timeAccordCondition(startTime,endTime)&&!timeAccordunDisturb()){
+                        //当前时间在开始结束时间之间，而且不在打扰时间内
+                        if(flag==1){
+                            flag++;
+                        }else {
+                            //判断距离是否大于50米
+                            if(curr_distance-lastDistance<50){
+                                Log.i(TAG, "run: 久坐");
+                                //小于50米，则说明久坐了
+                                Intent intent=new Intent(SedentaryReminderService.this, ShowRemind.class);
+                                startActivity(intent);
+
+                            }else {
+                                lastDistance=curr_distance;
+                            }
+                        }
+                    } else {
+                        lastDistance=curr_distance;
+                    }
+                } catch (ParseException e) {
+                    e.printStackTrace();
+                }
+            }
+        };
+        timer.schedule(task,0,3600000);         //每隔一小时检查一下
+    }
+
+    //判断当前时间在开始结束时间之间,true表示在范围内，
+    private Boolean timeAccordCondition(String begin,String last) throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
+        Date startDate,endDate,nowDate;
+        Calendar start,end,now;
+        startDate=sdf.parse(begin);
+        endDate=sdf.parse(last);
+        nowDate=sdf.parse(MyTime.getTodayTime());
+        start=Calendar.getInstance();
+        end=Calendar.getInstance();
+        now=Calendar.getInstance();
+
+        start.setTime(startDate);
+        end.setTime(endDate);
+        now.setTime(nowDate);
+
+        if(SedentaryReminder){
+            if(now.after(start)&&now.before(end)){
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+
+    //判断当前时间在免打扰时间之间,true表示在范围内，
+    private Boolean timeAccordunDisturb() throws ParseException {
+        SimpleDateFormat sdf=new SimpleDateFormat("HH:mm");
+        Date startDate,endDate,nowDate;
+        Calendar start,end,now;
+        startDate=sdf.parse("12:00");
+        endDate=sdf.parse("14:00");
+        nowDate=sdf.parse(MyTime.getTodayTime());
+        start=Calendar.getInstance();
+        end=Calendar.getInstance();
+        now=Calendar.getInstance();
+
+        start.setTime(startDate);
+        end.setTime(endDate);
+        now.setTime(nowDate);
+
+        if(SedentaryReminder&&unDisturb){
+            if(now.after(start)&&now.before(end)){
+                return true;
+            }else {
+                return false;
+            }
+        }else {
+            return false;
+        }
+    }
+
+    //定位
+    private void initLoc() {
+        //初始化定位
+        mLocationClient = new AMapLocationClient(getApplicationContext());
+        //设置定位回调监听
+        mLocationClient.setLocationListener(this);
+        //初始化定位参数
+        mLocationOption = new AMapLocationClientOption();
+        //设置定位模式为高精度模式，Battery_Saving为低功耗模式，Device_Sensors是仅设备模式
+        mLocationOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);
+        //设置是否返回地址信息（默认返回地址信息）
+        mLocationOption.setNeedAddress(true);
+        //设置是否只定位一次,默认为false
+        mLocationOption.setOnceLocation(false);
+        //设置是否强制刷新WIFI，默认为强制刷新
+        mLocationOption.setWifiActiveScan(true);
+        //设置是否允许模拟位置,默认为false，不允许模拟位置
+        mLocationOption.setMockEnable(false);
+        //设置定位间隔,单位毫秒,默认为2000ms
+        mLocationOption.setInterval(2000);
+        //给定位客户端对象设置定位参数
+        mLocationClient.setLocationOption(mLocationOption);
+        //启动定位
+        mLocationClient.startLocation();
+    }
+
+    /**
+     * 定位成功后回调函数
+     */
+    @Override
+    public void onLocationChanged(AMapLocation amapLocation) {
+        if (amapLocation != null) {
+            if (amapLocation.getErrorCode() == 0) {
+                //定位成功回调信息，设置相关消息
+                amapLocation.getLocationType();//获取当前定位结果来源，如网络定位结果，详见官方定位类型表
+                amapLocation.getLatitude();//获取纬度
+                amapLocation.getLongitude();//获取经度
+                amapLocation.getAccuracy();//获取精度信息
+                SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                Date date = new Date(amapLocation.getTime());
+                df.format(date);//定位时间
+                amapLocation.getAddress();//地址，如果option中设置isNeedAddress为false，则没有此结果，网络定位结果中会有地址信息，GPS定位不返回地址信息。
+                amapLocation.getCountry();//国家信息
+                amapLocation.getProvince();//省信息
+                amapLocation.getCity();//城市信息
+                amapLocation.getDistrict();//城区信息
+                amapLocation.getStreet();//街道信息
+                amapLocation.getStreetNum();//街道门牌号信息
+                amapLocation.getCityCode();//城市编码
+                amapLocation.getAdCode();//地区编码
+
+                if(lastAMapLocation==null){
+                    lastAMapLocation=amapLocation;
+                    Log.i(TAG, "lastAMapLocation: 第一次定位");
+                    saveLocation(amapLocation);
+                }else if(Math.abs(MiscUtil.getDistance(MiscUtil.getLatLng(lastAMapLocation),MiscUtil.getLatLng(amapLocation)))>Constant.INTERVAL_LOCATION){
+                    //经纬度不同表示不同的位置
+                    Log.i(TAG, "onLocationChanged: 与上一个距离超过10米");
+                    lastAMapLocation=amapLocation;
+                    saveLocation(amapLocation);
+                }
+            } else {
+                //显示错误信息ErrCode是错误码，errInfo是错误信息，详见错误码表。
+                Log.e("AmapError", "location Error, ErrCode:"
+                        + amapLocation.getErrorCode() + ", errInfo:"
+                        + amapLocation.getErrorInfo());
+                Log.i(TAG, "onLocationChanged: 定位失败");
+                Toast.makeText(getApplicationContext(), "定位失败", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    //激活定位
+    @Override
+    public void activate(OnLocationChangedListener onLocationChangedListener) {
+        mListener = onLocationChangedListener;
+    }
+
+    //停止定位
+    @Override
+    public void deactivate() {
+        mListener = null;
+    }
+
+    private void saveLocation(AMapLocation aMapLocation){
+        Log.i(TAG, "saveLocation: 调用了");
+        float dist = 0;
+        Date date = new Date(aMapLocation.getTime());
+        final GpsRecord gpsRecord=new GpsRecord(date,aMapLocation);
+
+        if (locations.size() > 0) {
+            GpsRecord pre = locations.get(locations.size() - 1);        //获得最后的记录
+            dist=MiscUtil.getDistance(MiscUtil.getLatLng(pre.loc),MiscUtil.getLatLng(aMapLocation));
+            dist = Math.abs(dist);
+        }
+
+        gpsRecord.setDistance(dist);
+        locations.add(gpsRecord);
+        curr_distance += dist;
+
+        Log.i(TAG, String.format("%s", gpsRecord.toString()));
+    }
+
+    @Override
+    public void onDestroy(){                    //服务销毁时调用
+        unregisterReceiver(openSedentaryReminder);
+        mLocationClient.stopLocation();//停止定位
+        mLocationClient.onDestroy();//销毁定位客户端。
+        Intent intent=new Intent(this,SedentaryReminderService.class);
+        startService(intent);
+        super.onDestroy();
+    }
+
+}
+

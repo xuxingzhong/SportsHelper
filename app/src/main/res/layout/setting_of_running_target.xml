@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.root.sportshelper.SettingOfRunningTarget"
+    android:orientation="vertical">
+    <include layout="@layout/back_toolbar"
+        android:id="@+id/Setting_toolbar"/>
+    <LinearLayout
+        android:id="@+id/noTarget"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp">
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/weight_1"
+            android:text="@string/noTarget"
+            android:textColor="@color/color_ff191919"
+            android:textSize="@dimen/dimen_16sp"
+            android:gravity="left|center"
+            android:layout_marginLeft="@dimen/dimen_16dp" />
+        <ImageView
+            android:id="@+id/noTargetDone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_done_pre"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/dimen_16dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color_d6d6d6" />
+    <LinearLayout
+        android:id="@+id/TargetOfDisdance"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp">
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/weight_1"
+            android:text="@string/TargetOfDisdance"
+            android:textColor="@color/color_ff191919"
+            android:textSize="@dimen/dimen_16sp"
+            android:gravity="left|center"
+            android:layout_marginLeft="@dimen/dimen_16dp" />
+        <ImageView
+            android:id="@+id/TargetOfDisdanceDone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_done_pre"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/dimen_16dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color_d6d6d6"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"/>
+    <TextView
+        android:id="@+id/Disdance"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp"
+        android:textColor="@color/color_808080"
+        android:textSize="@dimen/dimen_16sp"
+        android:gravity="left|center"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color_d6d6d6" />
+    <LinearLayout
+        android:id="@+id/TargetOfTime"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp">
+        <TextView
+            android:layout_width="@dimen/dimen_0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="@dimen/weight_1"
+            android:text="@string/TargetOfTime"
+            android:textColor="@color/color_ff191919"
+            android:textSize="@dimen/dimen_16sp"
+            android:gravity="left|center"
+            android:layout_marginLeft="@dimen/dimen_16dp" />
+        <ImageView
+            android:id="@+id/TargetOfTimeDone"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:src="@mipmap/ic_done_pre"
+            android:layout_gravity="right"
+            android:layout_marginRight="@dimen/dimen_16dp" />
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color_d6d6d6"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"/>
+    <TextView
+        android:id="@+id/Time"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_56dp"
+        android:textColor="@color/color_808080"
+        android:textSize="@dimen/dimen_16sp"
+        android:gravity="left|center"
+        android:layout_marginLeft="@dimen/dimen_16dp"
+        android:layout_marginRight="@dimen/dimen_16dp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dimen_1dp"
+        android:background="@color/color_d6d6d6" />
+</LinearLayout>

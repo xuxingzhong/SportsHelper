@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.root.sportshelper.ShowBadgeInfo"
+    android:gravity="center">
+    <LinearLayout
+        android:layout_width="@dimen/dimen_236dp"
+        android:layout_height="@dimen/dimen_274dp"
+        android:orientation="vertical"
+        android:layout_gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dimen_212dp"
+            android:layout_margin="@dimen/dimen_5dp"
+            android:orientation="vertical">
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/myBadgeLable"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                android:layout_marginTop="@dimen/dimen_30dp"
+                android:layout_gravity="center" />
+            <com.example.root.sportshelper.fonts.Black_Simplified_TextView
+                android:id="@+id/describeText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dimen_25dp"
+                android:layout_gravity="center"
+                android:textSize="@dimen/dimen_14sp"
+                android:textColor="@color/color_ff333333"/>
+        </LinearLayout>
+        <com.example.root.sportshelper.fonts.Black_Simplified_TextView
+            android:id="@+id/whetherGetText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dimen_12dp"
+            android:layout_gravity="center"
+            android:textSize="@dimen/dimen_12sp"
+            android:textColor="@color/color_ff333333"/>
+    </LinearLayout>
+</LinearLayout>

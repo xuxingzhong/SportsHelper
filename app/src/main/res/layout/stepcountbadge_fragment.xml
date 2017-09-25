@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="3">
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ChallengeTenThousandSteps"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ChallengeTenThousandSteps" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ChallengeTwentyThousandSteps"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ChallengeTwentyThousandSteps" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ChallengeThirtyThousandSteps"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ChallengeThirtyThousandSteps" />
+
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForThreeDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForThreeDays" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForFiveDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForFiveDays" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForTenDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForTenDays" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForTwentyDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForTwentyDays" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForFiftyDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForFiftyDays" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/ForOneHundredDays"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/ForOneHundredDays" />
+
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalTenkilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalTenkilometers" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalTwentykilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalTwentykilometers" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalFiftykilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalFiftykilometers" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalOneHundredkilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalOneHundredkilometers" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalFiveHundredkilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalFiveHundredkilometers" />
+            <com.example.root.sportshelper.ruler.myBadge
+                android:id="@+id/TotalThousandkilometers"
+                android:layout_width="@dimen/dimen_120dp"
+                android:layout_height="@dimen/dimen_120dp"
+                app:myBadgeText="@string/TotalThousandkilometers" />
+        </GridLayout>
+    </LinearLayout>
+</ScrollView>

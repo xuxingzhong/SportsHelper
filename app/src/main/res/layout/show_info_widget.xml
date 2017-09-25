@@ -1,0 +1,34 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/dimen_40dp"
+    android:background="@drawable/backgroudwidget"
+    android:padding="@dimen/widget_margin"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/step"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_10dp"/>
+    <TextView
+        android:id="@+id/showStep"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/dimen_10dp"/>
+
+    <ImageView
+        android:id="@+id/Calorie"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/dimen_10dp"/>
+    <TextView
+        android:id="@+id/showCalorie"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:gravity="center"/>
+</LinearLayout>

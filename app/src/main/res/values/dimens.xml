@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="dimen_0dp">0dp</dimen>
+    <dimen name="dimen_1dp">1dp</dimen>
+    <dimen name="dimen_2dp">2dp</dimen>
+    <dimen name="dimen_3dp">3dp</dimen>
+    <dimen name="dimen_4dp">4dp</dimen>
+    <dimen name="dimen_5dp">5dp</dimen>
+    <dimen name="dimen_6dp">6dp</dimen>
+    <dimen name="dimen_10dp">10dp</dimen>
+    <dimen name="dimen_12dp">12dp</dimen>
+    <dimen name="dimen_14dp">14dp</dimen>
+    <dimen name="dimen_15dp">15dp</dimen>
+    <dimen name="dimen_16dp">16dp</dimen>
+    <dimen name="dimen_18dp">18dp</dimen>
+    <dimen name="dimen_20dp">20dp</dimen>
+    <dimen name="dimen_24dp">24dp</dimen>
+    <dimen name="dimen_25dp">25dp</dimen>
+    <dimen name="dimen_26dp">26dp</dimen>
+    <dimen name="dimen_28dp">28dp</dimen>
+    <dimen name="dimen_30dp">30dp</dimen>
+    <dimen name="dimen_35dp">35dp</dimen>
+    <dimen name="dimen_36dp">36dp</dimen>
+    <dimen name="dimen_40dp">40dp</dimen>
+    <dimen name="dimen_42dp">42dp</dimen>
+    <dimen name="dimen_44dp">44dp</dimen>
+    <dimen name="dimen_46dp">46dp</dimen>
+    <dimen name="dimen_48dp">48dp</dimen>
+    <dimen name="dimen_50dp">50dp</dimen>
+    <dimen name="dimen_54dp">54dp</dimen>
+    <dimen name="dimen_56dp">56dp</dimen>
+    <dimen name="dimen_58dp">58dp</dimen>
+    <dimen name="dimen_60dp">60dp</dimen>
+    <dimen name="dimen_62dp">62dp</dimen>
+    <dimen name="dimen_64dp">64dp</dimen>
+    <dimen name="dimen_66dp">66dp</dimen>
+    <dimen name="dimen_70dp">70dp</dimen>
+    <dimen name="dimen_76dp">76dp</dimen>
+    <dimen name="dimen_77dp">77dp</dimen>
+    <dimen name="dimen_78dp">78dp</dimen>
+    <dimen name="dimen_80dp">80dp</dimen>
+    <dimen name="dimen_84dp">84dp</dimen>
+    <dimen name="dimen_88dp">88dp</dimen>
+    <dimen name="dimen_90dp">90dp</dimen>
+    <dimen name="dimen_92dp">92dp</dimen>
+    <dimen name="dimen_94dp">94dp</dimen>
+    <dimen name="dimen_96dp">96dp</dimen>
+    <dimen name="dimen_104dp">104dp</dimen>
+    <dimen name="dimen_106dp">106dp</dimen>
+    <dimen name="dimen_110dp">110dp</dimen>
+    <dimen name="dimen_114dp">114dp</dimen>
+    <dimen name="dimen_120dp">120dp</dimen>
+    <dimen name="dimen_134dp">134dp</dimen>
+    <dimen name="dimen_142dp">142dp</dimen>
+    <dimen name="dimen_144dp">144dp</dimen>
+    <dimen name="dimen_150dp">150dp</dimen>
+    <dimen name="dimen_162dp">162dp</dimen>
+    <dimen name="dimen_176dp">176dp</dimen>
+    <dimen name="dimen_180dp">180dp</dimen>
+    <dimen name="dimen_192dp">192dp</dimen>
+    <dimen name="dimen_212dp">212dp</dimen>
+    <dimen name="dimen_214dp">214dp</dimen>
+    <dimen name="dimen_216dp">216dp</dimen>
+    <dimen name="dimen_224dp">224dp</dimen>
+    <dimen name="dimen_234dp">234dp</dimen>
+    <dimen name="dimen_236dp">236dp</dimen>
+    <dimen name="dimen_272dp">272dp</dimen>
+    <dimen name="dimen_274dp">274dp</dimen>
+    <dimen name="dimen_282dp">282dp</dimen>
+    <dimen name="dimen_284dp">284dp</dimen>
+    <dimen name="dimen_288dp">288dp</dimen>
+    <dimen name="dimen_318dp">318dp</dimen>
+
+    <dimen name="dimen_10sp">10sp</dimen>
+    <dimen name="dimen_12sp">12sp</dimen>
+    <dimen name="dimen_14sp">14sp</dimen>
+    <dimen name="dimen_15sp">15sp</dimen>
+    <dimen name="dimen_16sp">16sp</dimen>
+    <dimen name="dimen_18sp">18sp</dimen>
+    <dimen name="dimen_20sp">20sp</dimen>
+    <dimen name="dimen_24sp">24sp</dimen>
+    <dimen name="dimen_30sp">30sp</dimen>
+    <dimen name="dimen_36sp">36sp</dimen>
+    <dimen name="dimen_42sp">42sp</dimen>
+    <dimen name="dimen_60sp">60sp</dimen>
+    <dimen name="dimen_84sp">84sp</dimen>
+    <dimen name="dimen_90sp">90sp</dimen>
+    <dimen name="dimen_105sp">105sp</dimen>
+
+    <dimen name="weight_1">1</dimen>
+
+    <!--身高初始值-->
+    <dimen name="bodyHeightCurrLocation">170</dimen>
+    <!--体重初始值-->
+    <dimen name="bodyWeightCurrLocation">60</dimen>
+    <!--身高初始值-->
+    <dimen name="bodyAgeCurrLocation">30</dimen>
+
+    <!--
+Refer to App Widget Documentation for margin information
+http://developer.android.com/guide/topics/appwidgets/index.html#CreatingLayout
+    -->
+    <dimen name="widget_margin">8dp</dimen>
+</resources>

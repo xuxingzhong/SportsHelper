@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+    <dbname value="SportHelper"></dbname>
+    <version value="11"></version>
+    <list>
+        <mapping class="com.example.root.sportshelper.database.PersonInfo"></mapping>
+        <mapping class="com.example.root.sportshelper.database.SportsRecord"></mapping>
+        <mapping class="com.example.root.sportshelper.database.RunningRecord"></mapping>
+        <mapping class="com.example.root.sportshelper.database.GpsRecord"></mapping>
+        <mapping class="com.example.root.sportshelper.database.SettingRecord"></mapping>
+        <mapping class="com.example.root.sportshelper.database.BadgeRecord"></mapping>
+    </list>
+</litepal>

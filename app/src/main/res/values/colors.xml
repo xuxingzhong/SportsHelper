@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+    <!--蓝色-->
+    <color name="title_bar_color">#2387f5</color>
+    <!--黑色-->
+    <color name="color_ff333333">#333333</color>
+    <!--蓝色-->
+    <color name="color_2387f5">#2387f5</color>
+    <!--灰色-->
+    <color name="color_d6d6d6">#d6d6d6</color>
+    <!--红色-->
+    <color name="color_ff3971">#ff3971</color>
+    <!--白色-->
+    <color name="color_ffffffff">#ffffff</color>
+    <color name="color_ffb9b9b9">#b9b9b9</color>
+    <color name="color_76e4ff">#76e4ff</color>
+    <color name="color_6676e4ff">#6676e4ff</color>
+    <color name="color_d8d8d8">#d8d8d8</color>
+    <color name="color_ff5555">#ff5555</color>
+    <color name="color_ff63c70b">#63c70b</color>
+    <color name="color_ffffbf01">#ffbf01</color>
+    <color name="color_ffff781e">#ff781e</color>
+    <color name="color_e7e7e7">#e7e7e7</color>
+    <color name="color_40e5f9">#40e5f9</color>
+    <color name="color_808080">#808080</color>
+    <color name="color_c4e6f6">#c4e6f6</color>
+    <color name="color_C0C0C0">#C0C0C0</color>
+    <color name="color_2eaaf0">#2eaaf0</color>
+    <color name="color_212a41">#212a41</color>
+    <color name="color_121622">#121622</color>
+    <color name="color_8affffff">#8affffff</color>
+    <color name="color_21202cFF">#21202c</color>
+    <color name="color_33ffffff">#33ffffff</color>
+    <color name="color_80ffffff">#80ffffff</color>
+    <color name="color_d0d0d0">#d0d0d0</color>
+    <color name="color_ff191919">#ff191919</color>
+</resources>

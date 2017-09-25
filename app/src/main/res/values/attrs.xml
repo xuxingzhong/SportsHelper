@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="RulerView">
+        <!--id值-->
+        <attr name="id" format="integer" />
+        <!--最大刻度-->
+        <attr name="max_value" format="integer" />
+        <!--最小刻度-->
+        <attr name="min_value" format="integer" />
+        <!--刻度字体大小-->
+        <attr name="scale_text_size" format="dimension" />
+        <!--刻度字体颜色-->
+        <attr name="scale_text_color" format="color" />
+        <!--刻度超过颜色-->
+        <attr name="scale_select_color" format="color" />
+        <!--刻度超过颜色背景-->
+        <attr name="scale_select_background_color" format="color" />
+        <!--刻度未超颜色-->
+        <attr name="scale_unselect_color" format="color" />
+        <!--标记颜色-->
+        <attr name="tag_color" format="color" />
+        <!--标尺开始显示位置-->
+        <attr name="start_location" format="dimension" />
+        <!--一屏显示Item-->
+        <attr name="show_item_size" format="integer" />
+        <!--一个刻度的大小-->
+        <attr name="one_item_value" format="integer" />
+    </declare-styleable>
+    <declare-styleable name="StepsTarget">
+        <!--底线颜色-->
+        <attr name="bottom_line_color" format="color"/>
+        <!--起始颜色-->
+        <attr name="first_color" format="color"/>
+        <!--结束颜色-->
+        <attr name="last_color" format="color"/>
+        <!--最小步数-->
+        <attr name="min_step" format="integer"/>
+        <!--最大步数-->
+        <attr name="max_step" format="integer"/>
+        <!--初始化进度值-->
+        <attr name="progressValue" format="integer"/>
+        <!--文字大小-->
+        <attr name="textSize" format="dimension" />
+        <!--文字颜色-->
+        <attr name="textColor" format="color" />
+        <!--文字背景-->
+        <attr name="textBackground" format="reference" />
+    </declare-styleable>
+
+
+    <!-- 圆形进度条 -->
+    <declare-styleable name="CircleProgressBar">
+        <!-- 是否开启抗锯齿 -->
+        <attr name="antiAlias" format="boolean" />
+        <!-- 圆弧起始角度，3点钟方向为0，顺时针递增，小于0或大于360进行取余 -->
+        <attr name="startAngle" format="float" />
+        <!-- 圆弧度数 -->
+        <attr name="sweepAngle" format="float" />
+        <!-- 设置动画时间 -->
+        <attr name="animTime" format="integer" />
+        <!-- 绘制内容的数值 -->
+        <attr name="maxValue" format="float" />
+        <attr name="value" format="float" />
+        <!-- 精度，默认为0 -->
+        <attr name="precision" format="integer" />
+        <attr name="valueSize" format="dimension" />
+        <attr name="valueColor" format="color|reference" />
+        <!-- 文字的偏移量。相对于圆半径而言，默认三分之一 -->
+        <attr name="textOffsetPercentInRadius" format="float" />
+        <!-- 绘制内容相应的提示语 -->
+        <attr name="hint" format="string|reference" />
+        <attr name="hintSize" format="dimension" />
+        <attr name="hintColor" format="color|reference" />
+        <!-- 绘制步数目标 -->
+        <attr name="target" format="string|reference" />
+        <attr name="targetSize" format="dimension" />
+        <attr name="targetColor" format="color|reference" />
+        <!-- 圆弧宽度 -->
+        <attr name="arcWidth" format="dimension" />
+        <!-- 圆弧颜色， -->
+        <attr name="arcColors" format="color|reference" />
+        <!-- 背景圆弧颜色，默认白色 -->
+        <attr name="bgArcColor" format="color|reference" />
+        <!-- 背景圆弧宽度 -->
+        <attr name="bgArcWidth" format="dimension" />
+        <!--暂停文字大小-->
+        <attr name="PauseTextSize" format="reference|dimension" />
+        <!--暂停文字-->
+        <attr name="PauseText" format="reference|string" />
+        <!--暂停文字颜色-->
+        <attr name="PauseTextColor" format="color|reference" />
+    </declare-styleable>
+    <!--柱形图-->
+    <declare-styleable name="HStepsCount">
+        <!--日周月类型-->
+        <attr name="type" format="integer"/>
+        <!--底线颜色-->
+        <attr name="bottomline_color" format="color"/>
+        <!--柱形图未选中颜色-->
+        <attr name="unselect_color" format="color"/>
+        <!--柱形图选中颜色-->
+        <attr name="select_color" format="color"/>
+        <!--最小步数-->
+        <attr name="minstep" format="integer"/>
+        <!--最大步数-->
+        <attr name="maxstep" format="integer"/>
+        <!--初始化进度值-->
+        <attr name="myprogressValue" format="integer"/>
+        <!--文字大小-->
+        <attr name="mytextSize" format="dimension" />
+        <!--文字颜色-->
+        <attr name="mytextColor" format="color" />
+        <!--文字选中颜色-->
+        <attr name="selecttextColor" format="color" />
+        <!--建议步数-->
+        <attr name="suggestStep" format="integer"/>
+    </declare-styleable>
+    <declare-styleable name="SlideLockView">
+        <attr name="lock_drawable" format="reference"/>
+        <attr name="lock_radius" format="dimension|reference"/>
+        <attr name="lock_tips_tx" format="string|reference"/>
+        <attr name="locl_tips_tx_size" format="dimension|reference"/>
+        <attr name="lock_tips_tx_color" format="color|reference"/>
+    </declare-styleable>
+
+    <!--徽章-->
+    <declare-styleable name="myBadge">
+        <attr name="picture" format="reference"/>
+        <attr name="myBadgeText" format="string|reference"/>
+        <attr name="myBadgeTextSize" format="dimension"/>
+        <attr name="myBadgeTextClor" format="color"/>
+    </declare-styleable>
+</resources>

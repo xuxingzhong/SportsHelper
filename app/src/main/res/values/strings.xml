@@ -1,0 +1,165 @@
+<resources>
+    <string name="app_name">运动助手</string>
+    <string name="personal_information">个人信息</string>
+    <string name="according_to_personal_information_calculate_Exercise">根据个人信息计算最佳运动量</string>
+    <string name="man">男</string>
+    <string name="woman">女</string>
+    <string name="height">身高(cm)</string>
+    <string name="weight">体重(Kg)</string>
+    <string name="age">年龄</string>
+    <string name="next">下一步</string>
+
+    <string name="sport_target">运动目标</string>
+    <string name="today_sport_target">每日运动目标</string>
+    <string name="previous">上一步</string>
+    <string name="done">完成</string>
+
+    <string name="step_count">计步</string>
+    <string name="running">跑步</string>
+    <string name="Kilometer">公里</string>
+    <string name="calorie">大卡</string>
+
+    <string name="day">日</string>
+    <string name="week">周</string>
+    <string name="mouth">月</string>
+    <string name="step_number">步数(步)</string>
+    <string name="expend_calorie">消耗热量(千卡)</string>
+    <string name="continue_time">活动时长(小时)</string>
+    <string name="mymileage">里程(公里)</string>
+
+    <string name="average_step_number">日均步数(步)</string>
+    <string name="Total_expend_calorie">总消耗热量(千卡)</string>
+    <string name="average_continue_time">日均活动时长(小时)</string>
+    <string name="Total_mymileage">总里程(公里)</string>
+
+    <string name="start">开始</string>
+    <string name="in_running">跑步中</string>
+    <string name="gps">GPS</string>
+    <string name="distance">距离(公里)</string>
+    <string name="speed">配速</string>
+    <string name="used_time">用时</string>
+    <string name="kilocalorie">千卡</string>
+    <string name="longpress_pause">长按暂停</string>
+    <string name="Continue">继续</string>
+    <string name="end">结束</string>
+
+    <string name="gps_prompt">当前GPS被禁用了， 确认要开启它吗？</string>
+    <string name="gps_no_permision">本应用程序没有权限使用GPS。</string>
+    <string name="gps_precision_low">精确度过低。%f</string>
+    <string name="gps_precision_low2">GPS精确度过低，低于%dm</string>
+    <string name="gps_listen_fail">无法获取位置坐标。 </string>
+
+    <string name="startplace">起点</string>
+    <string name="endplace">终点</string>
+    <string name="expend">消耗</string>
+
+    <string name="UpSlideUnlock">上滑解锁</string>
+    <string name="isQuit">跑步距离过短，退出不会保存。是否退出？</string>
+
+    <string name="settingOfStepCount">计步器设置</string>
+    <string name="settingOfRemind">提醒设置</string>
+    <string name="SedentaryReminder">久坐提醒</string>
+    <string name="startTime">开始时间</string>
+    <string name="endTime">结束时间</string>
+    <string name="unDisturb">午休免打扰</string>
+    <string name="unDisturbTime">12:00至14:00不要提醒我</string>
+    <string name="settingOfRunning">跑步设置</string>
+    <string name="AutoPause">自动暂停</string>
+    <string name="screenOn">运动中屏幕常亮</string>
+    <string name="VoiceAnnouncements">语音播报</string>
+    <string name="close">关闭</string>
+    <string name="runningTarget">跑步目标</string>
+    <string name="noTarget">不设目标,自由跑步</string>
+    <string name="openVoiceAnnouncements">开启语音播报</string>
+    <string name="SoundBroadcast">播报声音</string>
+    <string name="maleVoice">男声</string>
+    <string name="femaleVoice">女声</string>
+    <string name="BroadcastFrequencyAcDistance">播报频率(按距离)</string>
+    <string name="halfkilometers">0.5公里</string>
+    <string name="onekilometers">1公里</string>
+    <string name="twokilometers">2公里</string>
+    <string name="threekilometers">3公里</string>
+    <string name="BroadcastFrequencyAcTime">播报频率(按时间)</string>
+    <string name="Fiveminutes">5分钟</string>
+    <string name="tenminutes">10分钟</string>
+    <string name="Twentyminutes">20分钟</string>
+    <string name="Thirtyminutes">30分钟</string>
+    <string name="TargetOfDisdance">设定距离目标</string>
+    <string name="TargetOfTime">设定时长目标</string>
+    <string name="StepCountBadge">计步徽章</string>
+    <string name="runningBadge">跑步徽章</string>
+
+    <string name="ChallengeTenThousandSteps">挑战10000步</string>
+    <string name="ChallengeTenThousandStepsDescribe">当日步数达到10000步</string>
+    <string name="ChallengeTwentyThousandSteps">挑战20000步</string>
+    <string name="ChallengeTwentyThousandStepsDescribe">当日步数达到20000步</string>
+    <string name="ChallengeThirtyThousandSteps">挑战30000步</string>
+    <string name="ChallengeThirtyThousandStepsDescribe">当日步数达到30000步</string>
+
+    <string name="ForThreeDays">连续3天</string>
+    <string name="ForThreeDaysDescribe">连续3天,每天步数达到10000步</string>
+    <string name="ForFiveDays">连续5天</string>
+    <string name="ForFiveDaysDescribe">连续5天,每天步数达到10000步</string>
+    <string name="ForTenDays">连续10天</string>
+    <string name="ForTenDaysDescribe">连续10天,每天步数达到10000步</string>
+    <string name="ForTwentyDays">连续20天</string>
+    <string name="ForTwentyDaysDescribe">连续20天,每天步数达到10000步</string>
+    <string name="ForFiftyDays">连续50天</string>
+    <string name="ForFiftyDaysDescribe">连续50天,每天步数达到10000步</string>
+    <string name="ForOneHundredDays">连续100天</string>
+    <string name="ForOneHundredDaysDescribe">连续100天,每天步数达到10000步</string>
+
+    <string name="TotalTenkilometers">累计10公里</string>
+    <string name="TotalTenkilometersDescribe">累计步数达到10公里</string>
+    <string name="TotalTwentykilometers">累计20公里</string>
+    <string name="TotalTwentykilometersDescribe">累计步数达到20公里</string>
+    <string name="TotalFiftykilometers">累计50公里</string>
+    <string name="TotalFiftykilometersDescribe">累计步数达到50公里</string>
+    <string name="TotalOneHundredkilometers">累计100公里</string>
+    <string name="TotalOneHundredkilometersDescribe">累计步数达到100公里</string>
+    <string name="TotalFiveHundredkilometers">累计500公里</string>
+    <string name="TotalFiveHundredkilometersDescribe">累计步数达到500公里</string>
+    <string name="TotalThousandkilometers">累计1000公里</string>
+    <string name="TotalThousandkilometersDescribe">累计步数达到1000公里</string>
+
+    <string name="SpeedFivekilometers">极速5公里</string>
+    <string name="SpeedFivekilometersDescribe">一小时内跑完5公里</string>
+    <string name="SpeedEightkilometers">极速8公里</string>
+    <string name="SpeedEightkilometersDescribe">一小时内跑完8公里</string>
+    <string name="SpeedTenkilometers">极速10公里</string>
+    <string name="SpeedTenkilometersDescribe">一小时内跑完10公里</string>
+
+    <string name="ChallengeFivekilometers">挑战5公里</string>
+    <string name="ChallengeFivekilometersDescribe">当日跑步达到5公里</string>
+    <string name="ChallengeTenkilometers">挑战10公里</string>
+    <string name="ChallengeTenkilometersDescribe">当日跑步达到10公里</string>
+    <string name="ChallengeTwentykilometers">挑战20公里</string>
+    <string name="ChallengeTwentykilometersDescribe">当日跑步达到20公里</string>
+    <string name="ChallengeThirtykilometers">挑战30公里</string>
+    <string name="ChallengeThirtykilometersDescribe">当日跑步达到30公里</string>
+    <string name="ChallengeFortykilometers">挑战40公里</string>
+    <string name="ChallengeFortykilometersDescribe">当日跑步达到40公里</string>
+    <string name="ChallengeFiftykilometers">挑战50公里</string>
+    <string name="ChallengeFiftykilometersDescribe">当日跑步达到50公里</string>
+
+    <string name="TotalRunFiftykilometers">累计50公里,</string>
+    <string name="TotalRunFiftykilometersDescribe">累计跑步达到50公里</string>
+    <string name="TotalRunOneHundredkilometers">累计100公里,</string>
+    <string name="TotalRunOneHundredkilometersDescribe">累计跑步达到100公里</string>
+    <string name="TotalRunThreeHundredkilometers">累计300公里,</string>
+    <string name="TotalRunThreeHundredkilometersDescribe">累计跑步达到300公里</string>
+    <string name="TotalRunFiveHundredkilometers">累计500公里,</string>
+    <string name="TotalRunFiveHundredkilometersDescribe">累计跑步达到500公里</string>
+    <string name="TotalRunEightHundredkilometers">累计800公里,</string>
+    <string name="TotalRunEightHundredkilometersDescribe">累计跑步达到800公里</string>
+    <string name="TotalRunThousandkilometers">累计1000公里,</string>
+    <string name="TotalRunThousandkilometersDescribe">累计跑步达到1000公里</string>
+
+    <string name="get">获得</string>
+    <string name="noGet">未获得</string>
+
+    <string name="Congratulations">恭喜你</string>
+    <string name="CompleteTarget">你今天的目标已经完成,再接再厉</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+</resources>
