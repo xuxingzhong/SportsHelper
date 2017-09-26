@@ -31,4 +31,6 @@ public class Constant {
 
     public static int CURR_STEP=0;                      //当前步数
     public static int CURR_CALORIE=0;                  //当前卡路里
+
+    public static final int TIME_CONSUMING=1;                   //耗时操作
 }

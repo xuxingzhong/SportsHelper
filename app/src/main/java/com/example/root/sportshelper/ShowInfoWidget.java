@@ -17,6 +17,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
+ * 桌面小控件
  * Implementation of App Widget functionality.
  */
 public class ShowInfoWidget extends AppWidgetProvider {

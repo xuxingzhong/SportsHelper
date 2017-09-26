@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.example.root.sportshelper.ruler.myBadge;
 import com.example.root.sportshelper.utils.DbHelper;
 
+//点击后显示徽章的具体信息
 public class ShowBadgeInfo extends Activity {
     private String TAG="ShowBadgeInfo";
     myBadge myBadgeLable;

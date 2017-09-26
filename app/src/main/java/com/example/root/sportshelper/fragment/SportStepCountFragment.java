@@ -162,6 +162,8 @@ public class SportStepCountFragment extends Fragment implements Handler.Callback
                 .order("id desc")
                 .find(SportsRecord.class);
         for(SportsRecord mySportRecord:sportsRecords){
+            Log.i(TAG, "SportRecord: 日期为"+mySportRecord.getDate());
+            
             try {
                 if(MyTime.isYesterday(mySportRecord.getDate())){
                     mySportRecord.setDate("昨天");

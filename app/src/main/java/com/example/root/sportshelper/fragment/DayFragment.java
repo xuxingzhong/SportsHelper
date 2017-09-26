@@ -2,6 +2,8 @@ package com.example.root.sportshelper.fragment;
 
 import android.app.Fragment;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -37,8 +39,19 @@ public class DayFragment extends Fragment {
     private int type;       //日期类型
     private String TAG="DayFragment";
     private List<TypeAndStepCount> typeAndStepCountList=new ArrayList<>();
+    private List<SportsRecord> mySportsRecordList;
 
 
+    private Handler handler=new Handler(){
+        @Override
+        public void handleMessage(Message msg) {
+            switch (msg.what){
+                case Constant.TIME_CONSUMING:
+                    initRecycleView();
+                    break;
+            }
+        }
+    };
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +69,17 @@ public class DayFragment extends Fragment {
             rootView=inflater.inflate(R.layout.dayfragment,container,false);
             initView(rootView);
             typeAndStepCountList.clear();
+
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    mySportsRecordList= DataSupport.findAll(SportsRecord.class);
+                    Message message=new Message();
+                    message.what=Constant.TIME_CONSUMING;
+                    handler.sendMessage(message);
+                }
+            }).start();
+
             initRecycleView();
         }
         return rootView;
@@ -70,34 +94,37 @@ public class DayFragment extends Fragment {
     }
 
     private void initRecycleView(){
-        List<SportsRecord> mysportsRecordList= DataSupport.findAll(SportsRecord.class);
-        initTypeAndStepCount(Constant.DAY,mysportsRecordList.size()-1);
 
-        initInformation(mysportsRecordList.get(mysportsRecordList.size()-1));
-
-        LinearLayoutManager layoutManager=new LinearLayoutManager(getActivity());
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
         layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        layoutManager.setStackFromEnd(true);
         HDayStepCount.setLayoutManager(layoutManager);
-        final HStepCountAdapter hStepCountAdapter=new HStepCountAdapter(typeAndStepCountList);
+        final HStepCountAdapter hStepCountAdapter = new HStepCountAdapter(typeAndStepCountList);
         HDayStepCount.setAdapter(hStepCountAdapter);
-        HDayStepCount.smoothScrollToPosition(mysportsRecordList.size()-1);
-        hStepCountAdapter.setMyOnItemClickListener(new HStepCountAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                typeAndStepCountList.clear();
-                initTypeAndStepCount(Constant.DAY,position);
-                initInformation(typeAndStepCountList.get(position).getTypeSportsRecord());
-                hStepCountAdapter.refresh();
-            }
-        });
+
+        if(mySportsRecordList!=null) {
+            initTypeAndStepCount(Constant.DAY, mySportsRecordList.size() - 1);
+            initInformation(mySportsRecordList.get(mySportsRecordList.size() - 1));
+
+            HDayStepCount.smoothScrollToPosition(mySportsRecordList.size() - 1);
+            hStepCountAdapter.setMyOnItemClickListener(new HStepCountAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(View view, int position) {
+//                    typeAndStepCountList.clear();
+//                    initTypeAndStepCount(Constant.DAY, position);
+                    initTypeAndStepCountSelect(Constant.DAY, position);
+                    initInformation(typeAndStepCountList.get(position).getTypeSportsRecord());
+                    hStepCountAdapter.refresh();
+                }
+            });
+        }
     }
 
     private void initTypeAndStepCount(int mytype,int isSelectPos){
         this.type=mytype;
         int i=0;
         if(type== Constant.DAY){
-            List<SportsRecord> sportsRecordList= DataSupport.findAll(SportsRecord.class);
-            for(SportsRecord mySportsRecord:sportsRecordList){
+            for(SportsRecord mySportsRecord:mySportsRecordList){
                 if(mySportsRecord.getDate().equals(MyTime.getTodayDate())){
                     mySportsRecord.setDate("今天");
                 }else try {
@@ -120,6 +147,23 @@ public class DayFragment extends Fragment {
             }
         }
     }
+
+    //设置选择项
+    private void initTypeAndStepCountSelect(int mytype,int isSelectPos){
+        this.type=mytype;
+        int i=0;
+        if(type== Constant.DAY){
+            for(TypeAndStepCount typeAndStepCount:typeAndStepCountList){
+                if(i==isSelectPos){
+                    typeAndStepCount.setSelect(true);
+                }else {
+                    typeAndStepCount.setSelect(false);
+                }
+                i++;
+            }
+        }
+    }
+
     private void initInformation(SportsRecord sportsRecord){
         stepNumber.setText(sportsRecord.getRealStep()+"");
         expendCalorie.setText(sportsRecord.getCalorie()+"");

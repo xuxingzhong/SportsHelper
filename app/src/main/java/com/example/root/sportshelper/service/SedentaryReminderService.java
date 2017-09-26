@@ -1,5 +1,7 @@
 package com.example.root.sportshelper.service;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -8,6 +10,7 @@ import android.content.IntentFilter;
 import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
+import android.os.SystemClock;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -35,7 +38,7 @@ import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 
-//久坐提醒服务,使用步来做
+//久坐提醒服务,使用步来做,开始使用timer实现，现在用AlarmManager实现
 public class SedentaryReminderService extends Service{
     private String TAG="SedentaryReminderService";
     private Boolean SedentaryReminder;      //就坐提醒是否打开
@@ -43,20 +46,10 @@ public class SedentaryReminderService extends Service{
     private String endTime;                   //结束时间
     private Boolean unDisturb;              //午休免打扰是否打开
     private BroadcastReceiver openSedentaryReminder;
-    private Timer timer;
-    private TimerTask task;
 
     private int flag;                                                   //表示第几次调用计时器
     private int lastStep;
-
-
-    private Handler mHandler = new Handler(){
-        public void handleMessage(Message message){
-            switch (message.what){
-
-            }
-        }
-    };
+    private AlarmManager manager;
 
     @Override
     public void onCreate() {                //服务创建时调用
@@ -65,15 +58,13 @@ public class SedentaryReminderService extends Service{
         //初始化广播
         initBroadcastReceiver();
         initInfo();
-
-        if(SedentaryReminder){
-            checkSedentary();
-        }
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {      //每次服务启动时调用
-
+        if(SedentaryReminder){
+            checkSedentary();
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -95,14 +86,17 @@ public class SedentaryReminderService extends Service{
                     Log.i(TAG, "onReceive: 接收到久坐提醒变化广播");
                     initInfo();
                     if(SedentaryReminder){
-                        if(timer==null){
+                        if(manager==null){
                             Log.i(TAG, "onReceive: 开启久坐提醒");
                             checkSedentary();
                         }
                     }else {
-                        if(timer!=null){
+                        if(manager!=null){
                             Log.i(TAG, "onReceive: 取消久坐提醒");
-                            timer.cancel();
+                            Intent i=new Intent(SedentaryReminderService.this,SedentaryReminderService.class);
+                            PendingIntent pi=PendingIntent.getService(SedentaryReminderService.this,0,i,0);
+                            manager.cancel(pi);
+                            manager=null;
                         }
                     }
                 }
@@ -123,8 +117,38 @@ public class SedentaryReminderService extends Service{
 
     //检查是否久坐
     private void checkSedentary(){
-        timer=new Timer(true);
-        task=new TimerTask() {
+//        timer=new Timer(true);
+//        task=new TimerTask() {
+//            @Override
+//            public void run() {
+//                try {
+//                    if(timeAccordCondition(startTime,endTime)&&!timeAccordunDisturb()){
+//                        //当前时间在开始结束时间之间，而且不在打扰时间内
+//                        if(flag==1){
+//                            flag++;
+//                        }else {
+//                            //判断步数变化是否小于5
+//                            if(Math.abs(lastStep-StepDetector.CURRENT_STEP)<5){
+//                                Log.i(TAG, "run: 久坐");
+//                                //小于5，则说明久坐了
+//                                Intent intent=new Intent(SedentaryReminderService.this, ShowRemind.class);
+//                                startActivity(intent);
+//
+//                            }else {
+//                                lastStep=StepDetector.CURRENT_STEP;
+//                            }
+//                        }
+//                    } else {
+//                        lastStep=StepDetector.CURRENT_STEP;
+//                    }
+//                } catch (ParseException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        };
+//        timer.schedule(task,0,3600000);         //每隔一小时检查一下
+
+        new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
@@ -133,11 +157,12 @@ public class SedentaryReminderService extends Service{
                         if(flag==1){
                             flag++;
                         }else {
-                            //判断距离是否大于50米
+                            //判断步数变化是否小于5
                             if(Math.abs(lastStep-StepDetector.CURRENT_STEP)<5){
                                 Log.i(TAG, "run: 久坐");
                                 //小于5，则说明久坐了
                                 Intent intent=new Intent(SedentaryReminderService.this, ShowRemind.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                 startActivity(intent);
 
                             }else {
@@ -151,8 +176,13 @@ public class SedentaryReminderService extends Service{
                     e.printStackTrace();
                 }
             }
-        };
-        timer.schedule(task,0,3600000);         //每隔一小时检查一下
+        }).start();
+        manager=(AlarmManager)getSystemService(ALARM_SERVICE);
+        int anHour=60*60*1000;                  //一个小时的毫秒数
+        long triggerAtTime= SystemClock.elapsedRealtime()+anHour;
+        Intent i=new Intent(this,SedentaryReminderService.class);
+        PendingIntent pi=PendingIntent.getService(this,0,i,0);
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP,triggerAtTime,pi);
     }
 
     //判断当前时间在开始结束时间之间,true表示在范围内，

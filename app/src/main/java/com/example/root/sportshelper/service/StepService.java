@@ -167,42 +167,45 @@ public class StepService extends Service implements SensorEventListener {
         //example：有时候会用到系统对话框，权限可能很高，会覆盖在锁屏界面或者“关机”对话框之上，
         //所以监听这个广播，当收到时就隐藏自己的对话，如点击pad右下角部分弹出的对话框
         filter.addAction(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
+        filter.addAction(Intent.ACTION_TIME_TICK);
 
         mBatInfoReceiver=new BroadcastReceiver() {
             @Override
             public void onReceive(Context context, Intent intent) {
                 String action=intent.getAction();
 
-                if(Intent.ACTION_SCREEN_ON.equals(action)){
-                    Log.v(TAG,"screen on");
-                }else if(Intent.ACTION_SCREEN_OFF.equals(action)){
-                    Log.v(TAG,"screen off");
-                    save();
-                    //改为60秒一存储
-                    duration=60000;
-                }else if(Intent.ACTION_USER_PRESENT.equals(action)){
-                    Log.v(TAG,"screen unlock");
-                    save();
-                    //改为30秒一存储
-                    duration=30000;
-                }else if(Intent.ACTION_CLOSE_SYSTEM_DIALOGS.equals(intent.getAction())){
-                    Log.v(TAG,"receive Intent.ACTION_CLOSE_SYSTEM_DIALOGS  出现系统对话框");
-                    //保存一次
-                    save();
-                }else if(Intent.ACTION_SHUTDOWN.equals(intent.getAction())){
-                    Log.v(TAG,"receive ACTION_SHUTDOWN");
-                    save();
-                }else if(Intent.ACTION_TIME_CHANGED.equals(intent.getAction())){
-                    Log.v(TAG,"receive ACTION_TIME_CHANGED");
-                    initTodayData();
-                }else if(Intent.ACTION_DATE_CHANGED.equals(intent.getAction())){
-                    Log.v(TAG,"receive ACTION_DATE_CHANGED");
-                    save();
-                    initTodayData();
-                    //发送广播去更新计步记录中的数据
-                    //broadcast a message
-                    Intent msg = new Intent(Constant.UPDATESTEPCOUNT);
-                    sendOrderedBroadcast(msg,null);
+                switch (action){
+                    case Intent.ACTION_SCREEN_OFF:
+                        Log.v(TAG,"screen off");
+                        save();
+                        //改为10秒一存储
+                        duration=10000;
+                        break;
+                    case Intent.ACTION_SHUTDOWN:
+                        //关机关播
+                        Log.v(TAG,"receive ACTION_SHUTDOWN");
+                        save();
+                        break;
+                    case Intent.ACTION_USER_PRESENT:
+                        Log.v(TAG,"screen unlock");
+                        save();
+                        //改为30秒一存储
+                        duration=30000;
+                        break;
+                    case Intent.ACTION_CLOSE_SYSTEM_DIALOGS:
+                        Log.v(TAG,"receive Intent.ACTION_CLOSE_SYSTEM_DIALOGS  出现系统对话框");
+                        //保存一次
+                        save();
+                        break;
+                    //监听日期变化
+                    case Intent.ACTION_DATE_CHANGED:
+                    case Intent.ACTION_TIME_CHANGED:
+                    case Intent.ACTION_TIME_TICK:
+                        save();
+                        isNewDay();
+                        break;
+                    default:
+                        break;
                 }
             }
         };
@@ -212,6 +215,21 @@ public class StepService extends Service implements SensorEventListener {
     private void startTimeCount(){
         time=new TimeCount(duration,1000);
         time.start();
+    }
+
+    /**
+     * 监听晚上0点变化初始化数据
+     */
+    private void isNewDay() {
+        String time = "00:00";
+        if (time.equals(new SimpleDateFormat("HH:mm").format(new Date())) ||
+                !CURRENTDATE.equals(MyTime.getTodayDate())) {
+            Log.i(TAG, "isNewDay: 新的一天");
+            initTodayData();
+            //发送广播去更新计步记录中的数据
+            Intent msg = new Intent(Constant.UPDATESTEPCOUNT);
+            sendOrderedBroadcast(msg,null);
+        }
     }
 
     /**
@@ -235,8 +253,6 @@ public class StepService extends Service implements SensorEventListener {
 //        startForeground(0,notification);
 //        nm=(NotificationManager)getSystemService(NOTIFICATION_SERVICE);
 //        nm.notify(R.string.app_name,notification);
-
-
 
 
 //        PendingIntent contentIntent=PendingIntent.getActivity(this,0,

@@ -14,7 +14,7 @@ import com.example.root.sportshelper.fragment.SportStepCountFragment;
 import com.example.root.sportshelper.fragment.StepCountBadgeFragment;
 import com.example.root.sportshelper.fragment.runningBadgeFragment;
 import com.example.root.sportshelper.utils.MiscUtil;
-
+//徽章界面
 public class ShowBadge extends AppCompatActivity implements View.OnClickListener{
     ImageView back;
     TextView StepCountBadge;                                //计步徽章

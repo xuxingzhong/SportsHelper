@@ -27,6 +27,7 @@ public class MyTime {
         int day=calendar.get(Calendar.DAY_OF_MONTH);
         return  month+"月"+day+"日";
     }
+
     //是不是昨天
     public static Boolean isYesterday(String date)throws ParseException{
         Calendar calendar=Calendar.getInstance();

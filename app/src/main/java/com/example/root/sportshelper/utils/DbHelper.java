@@ -133,7 +133,7 @@ public class DbHelper {
                 }else {
                     String startWeek=MyTime.changeFormatOther(MyTime.getBeginDayOfWeek(sportsRecord.getDate()));
                     String endWeek=MyTime.changeFormatOther(MyTime.getEndDayOfWeek(sportsRecord.getDate()));
-                    newSportsRecord.setDate(startWeek+"~"+endWeek);
+                    newSportsRecord.setDate(startWeek+"-"+endWeek);
                 }
                 if(i==mySportsRecordList.size()){
                     newSportsRecord.setPersistTime(MyTime.getOccupyHour(newSportsRecord.getPersistTime(),-1));
